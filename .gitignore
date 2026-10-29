@@ -1,0 +1,19 @@
+# Secrets: commit .env.example with placeholders, never the real file
+.env
+*.env
+!*.env.example
+*.key
+*.pem
+*secret*
+*credentials*
+
+# Unredacted originals stay local
+**/raw/
+**/originals/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
