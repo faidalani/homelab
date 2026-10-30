@@ -1,0 +1,62 @@
+# Homepage services: Faid's Lab (Home SOC Lab v2)
+# Secrets come from /opt/homepage/.env (HOMEPAGE_VAR_*), never from this file.
+# v2 layout: the 3 tiles with live stats share one row; the 4 status-only tiles share another.
+
+- Lab Core:
+    - Proxmox:
+        icon: proxmox.svg
+        href: https://192.168.50.151:8006
+        description: Hypervisor
+        ping: 192.168.50.151
+        widget:
+          type: proxmox
+          url: https://192.168.50.151:8006
+          username: "{{HOMEPAGE_VAR_PROXMOX_TOKEN_ID}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_TOKEN_SECRET}}"
+          node: proxmox
+    - AdGuard Home:
+        icon: adguard-home.svg
+        href: http://192.168.50.101
+        description: Network-wide DNS filtering
+        siteMonitor: http://192.168.50.101
+        widget:
+          type: adguard
+          url: http://192.168.50.101
+          username: "{{HOMEPAGE_VAR_ADGUARD_USER}}"
+          password: "{{HOMEPAGE_VAR_ADGUARD_PASS}}"
+    - Uptime Kuma:
+        icon: uptime-kuma.svg
+        href: http://192.168.50.102:3001
+        description: Monitoring + Telegram alerts
+        siteMonitor: http://192.168.50.102:3001
+        widget:
+          type: uptimekuma
+          url: http://192.168.50.102:3001
+          slug: lab
+
+- Network & Links:
+    - Router:
+        icon: mdi-router-wireless
+        href: http://192.168.50.1
+        description: Home gateway
+        ping: 192.168.50.1
+    - Tailscale:
+        icon: si-tailscale-#ffffff
+        href: https://login.tailscale.com/admin/machines
+        description: Remote access
+        ping: 192.168.50.100
+    - Portfolio site:
+        icon: mdi-web
+        href: https://faidalani.com
+        description: faidalani.com
+        siteMonitor: https://faidalani.com
+    - Homelab write-ups:
+        icon: si-github-#ffffff
+        href: https://github.com/faidalani/homelab
+        description: Build log on GitHub
+    # Uncomment once you know the VM's IP:
+    # - DevWeb:
+    #     icon: mdi-code-braces
+    #     href: http://192.168.50.XXX
+    #     description: Web dev VM (107)
+    #     ping: 192.168.50.XXX

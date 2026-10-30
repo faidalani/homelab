@@ -1,0 +1,32 @@
+# Homepage settings: Faid's Lab (Home SOC Lab v2)
+title: Faid's Lab
+headerStyle: clean
+statusStyle: dot        # green/red dot on every tile that has ping or siteMonitor
+useEqualHeights: true
+
+# Background picture: save it as /opt/homepage/public/images/background.jpg
+# (a real image file, check with: head -c 4 FILE | od -An -tx1 → ff d8 ff = JPEG)
+# then run: systemctl restart homepage
+# cardBlur gives the "frosted glass" tiles. It can't be combined with the
+# background blur/saturate/brightness filters, so opacity does the dimming.
+background:
+  image: /images/background.jpg
+  opacity: 40           # dims the picture (lower = darker)
+cardBlur: md
+
+# Theme is NOT fixed here on purpose: leaving theme/color unset keeps the
+# light/dark switch and color picker at the bottom of the page.
+
+layout:
+  Lab Core:
+    style: row
+    columns: 3
+  Network & Links:
+    style: row
+    columns: 4
+
+# Start typing anywhere on the page to jump to a service
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: false
+  provider: duckduckgo

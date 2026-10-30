@@ -507,6 +507,6 @@ Image metadata is stripped.*
 | Internet, e.g. `9.9.9.9` (Ping): "is it my lab or my ISP?" | next |
 | Every new service in later builds | the same day it's built |
 
-*Next in the build: Homepage (one dashboard for every service, with live
+*Next in the build: [Homepage](../04-homepage/) (one dashboard for every service, with live
 Uptime Kuma status, which needs an Uptime Kuma **status page**), then Nginx
 Proxy Manager + Vaultwarden, then OPNsense and the segmented lab networks.*

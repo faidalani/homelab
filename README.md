@@ -21,6 +21,7 @@ with every step, screenshot and the problems I hit along the way.
 | Remote access | Tailscale subnet router + exit node, **zero inbound ports** |
 | DNS | AdGuard Home: network-wide filtering, encrypted (DoH) upstreams |
 | Monitoring | Uptime Kuma: health checks on every service, Telegram alerts |
+| Dashboard | Homepage: one page with live stats from every service |
 
 ```mermaid
 flowchart LR
@@ -35,6 +36,8 @@ flowchart LR
     UK -. health checks .-> TS
     UK -. health checks .-> AG
     UK -. alerts .-> TG((Telegram))
+    PVE --> HP[CT 103: Homepage<br/>dashboard]
+    HP -. read-only API .-> PVE
     Remote[Phone / laptop<br/>anywhere] -. encrypted tailnet .-> TS
 ```
 
@@ -42,14 +45,14 @@ flowchart LR
 
 ## Build log
 
-### Phase 1: Core services (home LAN)
+### Phase 1: Core services (home LAN) ✅ complete
 
 | # | Component | What it does | Status |
 |---|---|---|---|
 | 01 | [Tailscale](01-tailscale/) | Remote access to the whole lab with no open ports | ✅ Done |
 | 02 | [AdGuard Home](02-adguard-home/) | Network-wide DNS + ad/tracker blocking | ✅ Done |
 | 03 | [Uptime Kuma](03-uptime-kuma/) | Service monitoring + phone alerts | ✅ Done |
-| 04 | Homepage | Single dashboard for every service | 🔜 Next |
+| 04 | [Homepage](04-homepage/) | Single dashboard with live stats | ✅ Done |
 
 ### Later phases (planned)
 

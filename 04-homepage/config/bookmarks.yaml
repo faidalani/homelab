@@ -1,0 +1,40 @@
+# Bookmarks: Reddit and YouTube removed, GitHub kept
+
+- Developer:
+    - GitHub:
+        - icon: si-github-#ffffff
+          href: https://github.com/faidalani
+    - Homelab repo:
+        - icon: si-github-#ffffff
+          href: https://github.com/faidalani/homelab
+
+- SOC Toolkit:
+    - CyberChef:
+        - abbr: CC
+          href: https://gchq.github.io/CyberChef/
+    - VirusTotal:
+        - abbr: VT
+          href: https://www.virustotal.com/
+    - AbuseIPDB:
+        - abbr: AB
+          href: https://www.abuseipdb.com/
+    - MITRE ATT&CK:
+        - abbr: MA
+          href: https://attack.mitre.org/
+    - Shodan:
+        - abbr: SH
+          href: https://www.shodan.io/
+    - NVD (CVEs):
+        - abbr: NV
+          href: https://nvd.nist.gov/
+
+- Lab Admin:
+    - Tailscale admin:
+        - icon: si-tailscale-#ffffff
+          href: https://login.tailscale.com/admin
+    - Community Scripts:
+        - abbr: CS
+          href: https://community-scripts.org/
+    - Portfolio:
+        - icon: mdi-web
+          href: https://faidalani.com
