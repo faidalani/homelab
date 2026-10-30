@@ -7,7 +7,9 @@ remote access, DNS and monitoring running, I had four separate web UIs on four
 addresses. Homepage puts all of them on **one page with live data**, so a
 single glance answers "is everything OK?"
 
-![Final dashboard](screenshots/69-final-dashboard.png)
+![Final dashboard with frosted-glass tiles](screenshots/70-final-dashboard-wallpaper.png)
+
+<sub>Background: Kame House (Dragon Ball) fan art wallpaper, found on r/wallpapers. Not my artwork; rights belong to its creators.</sub>
 
 ---
 
@@ -370,13 +372,17 @@ Network & Links:  [ Router ] [ Tailscale ] [ Portfolio ] [ Homelab ] ← status 
 
 ![services.yaml, regrouped](screenshots/67-services-yaml-v2.png)
 
-**Background and "frosted glass" tiles:** a personal wallpaper sits behind
-the dashboard (not shown in these screenshots), dimmed with `opacity: 40`.
-`cardBlur: md` blurs it behind each tile. Homepage can't combine card blur
-with the background's own blur/brightness filters, so those are removed and
-opacity does the dimming.
+**Background and "frosted glass" tiles:** a wallpaper sits behind the
+dashboard, dimmed with `opacity: 40`. `cardBlur: md` blurs it behind each
+tile. Homepage can't combine card blur with the background's own
+blur/brightness filters, so those are removed and opacity does the dimming.
 
 ![settings.yaml, final](screenshots/68-settings-yaml-final.png)
+
+Before and after:
+
+![Before: plain dark theme](screenshots/69-final-dashboard.png)
+![After: wallpaper with frosted-glass tiles](screenshots/70-final-dashboard-wallpaper.png)
 
 ---
 
@@ -512,7 +518,7 @@ between updating one container and rebooting the whole lab.
 
 *Screenshots are redacted: the Proxmox token ID and secret, the AdGuard
 credentials, Homepage's pre-generated auth secret, and the timezone are
-covered. My personal wallpaper is left out of the final screenshots. The
+covered. The background is fan art, credited at the top. The
 lab's `192.168.50.x` addresses are left visible. They're private (RFC 1918)
 and not reachable from the internet. Image metadata is stripped.*
 
