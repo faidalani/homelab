@@ -276,8 +276,8 @@ the malware-blocking endpoint.
 ### Single point of failure
 With the router handing out only AdGuard's IP, if CT 101 goes down, the whole
 house loses DNS. Two things keep that manageable: the CT should be set to
-**start at boot** (CT → Options → Start at boot), and Uptime Kuma (next build)
-will alert me if it stops responding. I'm deliberately *not* adding a public
+**start at boot** (CT → Options → Start at boot), and Uptime Kuma
+([build 03](../03-uptime-kuma/)) now alerts me if it stops answering DNS. I'm deliberately *not* adding a public
 resolver as the router's second DNS. Devices would use it at random and
 skip filtering.
 
@@ -306,6 +306,6 @@ covered, so nothing lists what's on my home network. AdGuard's own
 `192.168.50.x` address is left visible. It's private (RFC 1918) and not
 reachable from the internet. Image metadata is stripped.*
 
-*Next in the build: Uptime Kuma (service monitoring), then Homepage
+*Next in the build: [Uptime Kuma](../03-uptime-kuma/) (service monitoring), then Homepage
 (dashboard), Nginx Proxy Manager + Vaultwarden, then OPNsense and the
 segmented lab networks.*

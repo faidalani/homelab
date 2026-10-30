@@ -20,6 +20,7 @@ with every step, screenshot and the problems I hit along the way.
 | Home LAN | `192.168.50.0/24` (core service containers live here) |
 | Remote access | Tailscale subnet router + exit node, **zero inbound ports** |
 | DNS | AdGuard Home: network-wide filtering, encrypted (DoH) upstreams |
+| Monitoring | Uptime Kuma: health checks on every service, Telegram alerts |
 
 ```mermaid
 flowchart LR
@@ -30,6 +31,10 @@ flowchart LR
     PVE --> TS[CT 100: Tailscale<br/>subnet router + exit node]
     PVE --> AG[CT 101: AdGuard Home<br/>DNS filtering]
     AG -. DoH .-> DNS((Quad9 /<br/>Cloudflare))
+    PVE --> UK[CT 102: Uptime Kuma<br/>monitoring]
+    UK -. health checks .-> TS
+    UK -. health checks .-> AG
+    UK -. alerts .-> TG((Telegram))
     Remote[Phone / laptop<br/>anywhere] -. encrypted tailnet .-> TS
 ```
 
@@ -43,8 +48,8 @@ flowchart LR
 |---|---|---|---|
 | 01 | [Tailscale](01-tailscale/) | Remote access to the whole lab with no open ports | ✅ Done |
 | 02 | [AdGuard Home](02-adguard-home/) | Network-wide DNS + ad/tracker blocking | ✅ Done |
-| 03 | Uptime Kuma | Service uptime monitoring | 🔜 Next |
-| 04 | Homepage | Single dashboard for every service | Planned |
+| 03 | [Uptime Kuma](03-uptime-kuma/) | Service monitoring + phone alerts | ✅ Done |
+| 04 | Homepage | Single dashboard for every service | 🔜 Next |
 
 ### Later phases (planned)
 
