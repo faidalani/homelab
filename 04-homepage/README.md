@@ -7,7 +7,7 @@ remote access, DNS and monitoring running, I had four separate web UIs on four
 addresses. Homepage puts all of them on **one page with live data**, so a
 single glance answers "is everything OK?"
 
-![Final dashboard with frosted-glass tiles](screenshots/70-final-dashboard-wallpaper.png)
+![Final dashboard with frosted-glass tiles](screenshots/27-final-dashboard-wallpaper.png)
 
 <sub>Background: Kame House (Dragon Ball) fan art wallpaper, found on r/wallpapers. Not my artwork; rights belong to its creators.</sub>
 
@@ -91,7 +91,11 @@ Challenge #1). I chose **Advanced Install**.
 
 ## Part 2: Advanced Install
 
-Same approach as Uptime Kuma: every setting chosen on purpose.
+Same approach as Uptime Kuma: every setting chosen on purpose. This is the
+fourth container built with the same wizard, so the screens look identical
+to that build ([full walkthrough with every screen](../03-uptime-kuma/#part-2-advanced-install-every-choice-explained)).
+Below are this build's choices. The **Confirm Settings** screenshot further
+down shows them all in one place.
 
 ### Identity, resources and network
 
@@ -107,18 +111,8 @@ Same approach as Uptime Kuma: every setting chosen on purpose.
 | DNS search domain | blank | No local domain until Active Directory |
 | DNS server | `9.9.9.9` | Keeps the dashboard loading even if AdGuard is down, so it can *show* AdGuard as down |
 
-![Unprivileged](screenshots/04-container-type-unprivileged.png)
-![Container ID 103](screenshots/07-container-id-103.png)
-![Hostname](screenshots/08-hostname-homepage.png)
-![Disk](screenshots/09-disk-size.png)
-![CPU](screenshots/10-cpu-cores.png)
-![RAM](screenshots/11-ram-size.png)
-![Bridge vmbr0](screenshots/12-network-bridge-vmbr0.png)
-![IPv4 static](screenshots/13-ipv4-static.png)
-![Static IP](screenshots/14-static-ip.png)
-![Gateway](screenshots/15-gateway.png)
-![DNS search domain](screenshots/18-dns-search-domain.png)
-![DNS server](screenshots/19-dns-server-quad9.png)
+![Gateway](screenshots/04-gateway.png)
+![DNS server](screenshots/05-dns-server-quad9.png)
 
 > **Why not AdGuard for DNS?** Two valid options here. With Quad9, the
 > dashboard keeps working during an AdGuard outage. With AdGuard, Homepage's
@@ -136,9 +130,6 @@ Same approach as Uptime Kuma: every setting chosen on purpose.
 | FUSE, GPU, mknod, extra mounts | **No / none** | Not used |
 | Nesting | Yes (script default) | Needed by modern systemd in unprivileged Debian CTs |
 
-![SSH key source: none](screenshots/23-ssh-key-source-none.png)
-![Root SSH: No](screenshots/24-ssh-access-no.png)
-![TUN/TAP: No](screenshots/26-tun-tap-no.png)
 
 **The TUN/TAP question across the lab:**
 
@@ -150,7 +141,7 @@ Same approach as Uptime Kuma: every setting chosen on purpose.
 | 103 Homepage | No |
 
 <details>
-<summary><b>Show every other wizard screen</b> (all left at default / No)</summary>
+<summary><b>Every other wizard choice</b> (all left at default / No)</summary>
 
 | Screen | Choice |
 |---|---|
@@ -169,36 +160,18 @@ Same approach as Uptime Kuma: every setting chosen on purpose.
 | Post-install hook | none |
 | Verbose mode | No |
 
-![Root password](screenshots/05-root-password.png)
-![Password verification](screenshots/06-password-verification.png)
-![IPv6 auto](screenshots/16-ipv6-auto.png)
-![MTU](screenshots/17-mtu-default.png)
-![MAC address](screenshots/20-mac-address-auto.png)
-![VLAN tag](screenshots/21-vlan-tag-none.png)
-![Container tags](screenshots/22-container-tags.png)
-![FUSE: No](screenshots/25-fuse-no.png)
-![Nesting: Yes](screenshots/27-nesting-yes.png)
-![GPU: No](screenshots/28-gpu-passthrough-no.png)
-![APT cacher: No](screenshots/29-apt-cacher-no.png)
-![HTTP proxy: No](screenshots/30-http-proxy-no.png)
-![Timezone](screenshots/31-container-timezone.png)
-![Protection: No](screenshots/32-container-protection-no.png)
-![mknod: No](screenshots/33-mknod-no.png)
-![Mount filesystems](screenshots/34-mount-filesystems-none.png)
-![Post-install hook](screenshots/35-post-install-hook-none.png)
-![Verbose: No](screenshots/36-verbose-mode-no.png)
 
 </details>
 
 ### Confirm, and a stale default caught
 
-![Confirm settings](screenshots/37-confirm-settings.png)
+![Confirm settings](screenshots/06-confirm-settings.png)
 
 Because defaults from the old lab existed, the script reported
 **differences**. **View Diff** showed exactly one: the DNS server.
 
-![App defaults: differences detected](screenshots/38-app-defaults-differences.png)
-![The diff: old DNS 192.168.50.24 → new 9.9.9.9](screenshots/39-app-defaults-diff.png)
+![App defaults: differences detected](screenshots/07-app-defaults-differences.png)
+![The diff: old DNS 192.168.50.24 → new 9.9.9.9](screenshots/08-app-defaults-diff.png)
 
 `192.168.50.24` was my **old AdGuard's IP**, a container that no longer
 exists. I chose **Update Defaults**, so any future rebuild uses the
@@ -208,7 +181,7 @@ current values.
 
 ## Part 3: Install, then updates
 
-![Install complete](screenshots/40-install-complete.png)
+![Install complete](screenshots/09-install-complete.png)
 
 Homepage 2.7.0 installed on Node.js 24. The script also updated the
 container's OS during install.
@@ -218,8 +191,7 @@ install script used, not inside CT 103. So this updated the **Proxmox host
 itself**: 48 packages, including a new kernel and `pve-manager` (PVE 9.2.20
 → 9.2.24).
 
-![apt update && apt upgrade on the Proxmox host](screenshots/41-host-apt-upgrade.png)
-![Upgrade done, host reboot](screenshots/42-host-upgrade-reboot.png)
+![apt update && apt upgrade on the Proxmox host](screenshots/10-host-apt-upgrade.png)
 
 Updating the host wasn't wrong, and the new kernel needed a reboot to take
 effect, so rebooting was the right call. What I learned:
@@ -240,7 +212,7 @@ confirming **Options → Start at boot = Yes** on each one.
 
 The default dashboard: placeholder groups, plus Reddit and YouTube bookmarks.
 
-![Default dashboard](screenshots/43-default-dashboard.png)
+![Default dashboard](screenshots/11-default-dashboard.png)
 
 ---
 
@@ -251,24 +223,24 @@ Instead I created a token that can only *read*.
 
 **Datacenter → Permissions → API Tokens → Add**
 
-![API Tokens page](screenshots/44-api-tokens-page.png)
+![API Tokens page](screenshots/12-api-tokens-page.png)
 
 User `root@pam`, Token ID `homepage`, **Privilege Separation ✅**. With
 privilege separation on, the token gets *only* the permissions I assign to
 it, not everything root can do.
 
-![Add token](screenshots/45-add-token.png)
+![Add token](screenshots/13-add-token.png)
 
 The secret is shown **once**. I copied it straight into the `.env` file
 (Part 6).
 
-![Token secret (redacted)](screenshots/46-token-created.png)
+![Token secret (redacted)](screenshots/14-token-created.png)
 
 Then I gave it a role. **Permissions → Add → API Token Permission**:
 Path `/`, Token `root@pam!homepage`, Role **PVEAuditor**.
 
-![Add API token permission](screenshots/47-add-api-token-permission.png)
-![PVEAuditor on /](screenshots/48-pveauditor-role.png)
+![Add API token permission](screenshots/15-add-api-token-permission.png)
+![PVEAuditor on /](screenshots/16-pveauditor-role.png)
 
 **PVEAuditor** can view status and stats but **can't change anything**: no
 start/stop, no config edits, no deletes. If this token ever leaked, the worst
@@ -288,7 +260,6 @@ Back up the defaults first:
 cp -r /opt/homepage/config /opt/homepage/config.bak
 ```
 
-![Backup](screenshots/49-backup-config.png)
 
 Then replace each file: empty it, paste the new version in `nano`, and
 save.
@@ -298,8 +269,6 @@ truncate -s 0 /opt/homepage/config/services.yaml
 nano /opt/homepage/config/services.yaml
 ```
 
-![Empty the file](screenshots/50-truncate-services.png)
-
 | File | What it controls | Final version |
 |---|---|---|
 | `services.yaml` | The tiles and their live widgets | [config/services.yaml](config/services.yaml) |
@@ -308,9 +277,6 @@ nano /opt/homepage/config/services.yaml
 | `settings.yaml` | Title, layout, background, look | [config/settings.yaml](config/settings.yaml) |
 | `.env` | **Secrets only** (never committed) | [config/env.example](config/env.example) |
 
-![services.yaml (first version)](screenshots/51-services-yaml-v1.png)
-![bookmarks.yaml](screenshots/52-bookmarks-yaml.png)
-![widgets.yaml](screenshots/53-widgets-yaml.png)
 
 ### Keeping secrets out of the config
 
@@ -325,8 +291,7 @@ Homepage fills them in at startup from `/opt/homepage/.env`. The existing
 `HOMEPAGE_ALLOWED_HOSTS` line stays as it is: it's Homepage's built-in
 protection against requests using unexpected host names.
 
-![The .env file before](screenshots/54-env-before.png)
-![Secrets added at the end (redacted)](screenshots/55-env-values-added.png)
+![Secrets added at the end (redacted)](screenshots/17-env-values-added.png)
 
 ```
 HOMEPAGE_VAR_PROXMOX_TOKEN_ID=root@pam!homepage
@@ -350,8 +315,8 @@ systemctl restart homepage
 systemctl status homepage --no-pager
 ```
 
-![chmod 600](screenshots/56-chmod-600-env.png)
-![Service running](screenshots/57-service-running.png)
+![chmod 600](screenshots/18-chmod-600-env.png)
+![Service running](screenshots/19-service-running.png)
 
 ### Why the Tailscale tile has no live stats
 The Tailscale widget needs an API key with full control of the tailnet, and
@@ -370,19 +335,17 @@ Lab Core:         [ Proxmox ]  [ AdGuard ]  [ Uptime Kuma ]        ← live stat
 Network & Links:  [ Router ] [ Tailscale ] [ Portfolio ] [ Homelab ] ← status dots
 ```
 
-![services.yaml, regrouped](screenshots/67-services-yaml-v2.png)
 
 **Background and "frosted glass" tiles:** a wallpaper sits behind the
 dashboard, dimmed with `opacity: 40`. `cardBlur: md` blurs it behind each
 tile. Homepage can't combine card blur with the background's own
 blur/brightness filters, so those are removed and opacity does the dimming.
 
-![settings.yaml, final](screenshots/68-settings-yaml-final.png)
 
 Before and after:
 
-![Before: plain dark theme](screenshots/69-final-dashboard.png)
-![After: wallpaper with frosted-glass tiles](screenshots/70-final-dashboard-wallpaper.png)
+![Before: plain dark theme](screenshots/26-final-dashboard.png)
+![After: wallpaper with frosted-glass tiles](screenshots/27-final-dashboard-wallpaper.png)
 
 ---
 
@@ -398,7 +361,7 @@ to download anything. **View Diff → Update Defaults** fixed it.
 
 ### 2. AdGuard widget: a generic "HTTP Error"
 
-![AdGuard tile: API Error](screenshots/58-adguard-api-error.png)
+![AdGuard tile: API Error](screenshots/20-adguard-api-error.png)
 
 The tile gave no detail, just "see logs". The cause turned out to be
 **a wrong AdGuard password** in `.env`. Two ways to find that quickly: the
@@ -415,14 +378,14 @@ brute-force protection, so it can **lock out** the dashboard's IP. Fix the
 credentials first, *then* restart AdGuard (`systemctl restart AdGuardHome`
 in CT 101) to clear any block, then restart Homepage.
 
-![AdGuard stats working](screenshots/59-adguard-fixed.png)
+![AdGuard stats working](screenshots/21-adguard-fixed.png)
 
 **Lesson:** generic UI errors hide the cause. The logs and a direct API test
 show it.
 
 ### 3. `Widgets.yaml` ≠ `widgets.yaml`
 
-![nano Widgets.yaml](screenshots/60-widgets-capital-w.png)
+![nano Widgets.yaml](screenshots/22-widgets-capital-w.png)
 
 I typed the file name with a capital **W**. Linux file names are
 **case-sensitive**, so nano created a brand-new file that Homepage never
@@ -431,7 +394,7 @@ fixed it. Clean up the stray copy with `rm /opt/homepage/config/Widgets.yaml`.
 
 ### 4. A fixed theme hid the night-mode switch
 
-![settings.yaml with theme: dark](screenshots/61-settings-fixed-theme.png)
+![settings.yaml with theme: dark](screenshots/23-settings-fixed-theme.png)
 
 `theme: dark` and `color: slate` look fine, but a fixed theme **removes** the
 light/dark toggle and the color picker, and `hideVersion` hid the version.
@@ -445,14 +408,13 @@ sed -i 's/icon: github.svg/icon: si-github-#ffffff/; s/icon: tailscale.svg/icon:
   /opt/homepage/config/services.yaml /opt/homepage/config/bookmarks.yaml
 ```
 
-![The fix](screenshots/62-remove-theme-white-icons.png)
 
 ### 5. The background that was really a web page
 First attempt: the Reddit post URL, which returned **403 Forbidden**. Second
 attempt: the Imgur *page* URL. That download "worked" but saved only
 7.4 KB.
 
-![curl: 403, then a 7.4 KB file](screenshots/65-curl-403-and-html.png)
+![curl: 403, then a 7.4 KB file](screenshots/24-curl-403-and-html.png)
 
 Checking the file's first bytes (its **magic bytes**) showed why:
 
@@ -461,7 +423,7 @@ head -c 4 background.jpg | od -An -tx1
 #  3c 21 64 6f   →  "<!do", the start of an HTML page, not a JPEG
 ```
 
-![Magic bytes: HTML, not an image](screenshots/66-magic-bytes-html.png)
+![Magic bytes: HTML, not an image](screenshots/25-magic-bytes-html.png)
 
 A real JPEG starts with `ff d8 ff`, a PNG with `89 50 4e 47`. The fix was
 the **direct image link** (`i.imgur.com/<id>.jpg`), not the page that
@@ -472,8 +434,6 @@ in malware triage.
 There was also a self-inflicted step: earlier, I had commented out the whole
 `background:` block while the picture wasn't ready, then forgot to undo it.
 
-![Commenting out the background block](screenshots/63-comment-out-background.png)
-![Background block still commented](screenshots/64-background-commented.png)
 
 ### 6. Ran updates on the host instead of the container
 Covered in Part 3: the prompt said `root@proxmox`, not `root@homepage`.
