@@ -61,13 +61,11 @@ least-privilege container settings
 Same source as AdGuard: the Proxmox VE Community Scripts project
 (community-scripts.org).
 
-![Searching for Proxmox helper scripts](screenshots/01-google-helper-scripts.png)
-![Search the site for Uptime Kuma](screenshots/02-community-scripts-search.png)
 
 The Uptime Kuma page shows the version, the default resources (1 CPU,
 1024 MB RAM, 4 GB disk), the port (`3001`) and the install command:
 
-![Uptime Kuma script page](screenshots/03-uptime-kuma-script-page.png)
+![Uptime Kuma script page](screenshots/01-uptime-kuma-script-page.png)
 
 Run it from the **Proxmox host shell** (Node → Shell), not inside a container:
 
@@ -75,7 +73,7 @@ Run it from the **Proxmox host shell** (Node → Shell), not inside a container:
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/uptimekuma.sh)"
 ```
 
-![Install command in the Proxmox shell](screenshots/04-helper-command-shell.png)
+![Install command in the Proxmox shell](screenshots/02-helper-command-shell.png)
 
 > **Trust check:** this pipes a script from the internet into `bash` as root
 > on the hypervisor. The script page links the install source code, and
@@ -89,7 +87,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/Proxmo
 defaults. That's how I pinned a static IP and kept the container as locked
 down as the service allows.
 
-![Advanced Install](screenshots/05-advanced-install.png)
+![Advanced Install](screenshots/03-advanced-install.png)
 
 ### Identity and resources
 
@@ -101,12 +99,6 @@ down as the service allows.
 | Hostname | `uptimekuma` | Says what it is |
 | Disk / CPU / RAM | 4 GB / 1 core / 1024 MB | The script's default profile. Plenty for a few dozen monitors. |
 
-![Unprivileged container](screenshots/06-container-type-unprivileged.png)
-![Container ID 102](screenshots/09-container-id-102.png)
-![Hostname uptimekuma](screenshots/10-hostname-uptimekuma.png)
-![Disk size 4 GB](screenshots/11-disk-size.png)
-![1 CPU core](screenshots/12-cpu-cores.png)
-![1024 MB RAM](screenshots/13-ram-size.png)
 
 ### Network: the part I almost got wrong
 
@@ -118,10 +110,7 @@ down as the service allows.
 | IPv6 | auto (SLAAC) | Default. The network has no IPv6 internet, which is harmless. |
 | MTU | blank (1500) | Default |
 
-![Network bridge vmbr0](screenshots/14-network-bridge-vmbr0.png)
-![IPv4 static](screenshots/15-ipv4-static.png)
-![Static IP 192.168.50.102/24](screenshots/16-static-ip.png)
-![Gateway 192.168.50.1](screenshots/17-gateway.png)
+![Gateway 192.168.50.1](screenshots/04-gateway.png)
 
 > **Gateway ≠ DNS server.** Partway through, I wasn't sure whether the
 > gateway should be AdGuard's IP (`.101`). It shouldn't. AdGuard *answers
@@ -136,8 +125,7 @@ down as the service allows.
 | DNS search domain | blank | There's no local domain yet. `faid.lab` arrives with Active Directory. |
 | DNS server | **`9.9.9.9`** (Quad9) | See below |
 
-![DNS search domain blank](screenshots/20-dns-search-domain.png)
-![DNS server 9.9.9.9](screenshots/21-dns-server-quad9.png)
+![DNS server 9.9.9.9](screenshots/05-dns-server-quad9.png)
 
 > **Why not point it at AdGuard?** If Uptime Kuma used AdGuard for DNS and
 > AdGuard went down, Uptime Kuma couldn't resolve `api.telegram.org`. The
@@ -155,9 +143,8 @@ down as the service allows.
 | Nesting | Yes (script default) | Proxmox and the script enable it for unprivileged Debian containers, because modern systemd inside the container relies on it. |
 | FUSE, GPU, mknod, extra mounts | **No / none** | Uptime Kuma uses none of them |
 
-![SSH key source: none](screenshots/25-ssh-key-source-none.png)
-![Root SSH access: No](screenshots/26-ssh-access-no.png)
-![TUN/TAP: No](screenshots/28-tun-tap-no.png)
+![Root SSH access: No](screenshots/06-ssh-access-no.png)
+![TUN/TAP: No](screenshots/07-tun-tap-no.png)
 
 **The TUN/TAP question across the lab so far:**
 
@@ -168,7 +155,7 @@ down as the service allows.
 | 102 Uptime Kuma | No | Monitoring over normal HTTP, ping and DNS |
 
 <details>
-<summary><b>Show every other wizard screen</b> (all left at default / No)</summary>
+<summary><b>Every other wizard choice</b> (all left at default / No)</summary>
 
 | Screen | Choice |
 |---|---|
@@ -190,38 +177,19 @@ down as the service allows.
 | Post-install hook | none |
 | Verbose mode | No |
 
-![Root password](screenshots/07-root-password.png)
-![Password verification](screenshots/08-password-verification.png)
-![IPv6 auto](screenshots/18-ipv6-auto.png)
-![MTU default](screenshots/19-mtu-default.png)
-![MAC address auto](screenshots/22-mac-address-auto.png)
-![VLAN tag none](screenshots/23-vlan-tag-none.png)
-![Container tags](screenshots/24-container-tags.png)
-![FUSE: No](screenshots/27-fuse-no.png)
-![Nesting: Yes](screenshots/29-nesting-yes.png)
-![GPU passthrough: No](screenshots/30-gpu-passthrough-no.png)
-![mknod: No](screenshots/31-mknod-no.png)
-![Mount filesystems: none](screenshots/32-mount-filesystems-none.png)
-![Container protection: No](screenshots/33-container-protection-no.png)
-![APT cacher: No](screenshots/34-apt-cacher-no.png)
-![HTTP proxy: No](screenshots/35-http-proxy-no.png)
-![Container timezone](screenshots/36-container-timezone.png)
-![Post-install hook: none](screenshots/37-post-install-hook-none.png)
-![Verbose mode: No](screenshots/38-verbose-mode-no.png)
-
 </details>
 
 ### Confirm and save
 
 The summary shows every choice before anything is built:
 
-![Confirm settings](screenshots/39-confirm-settings.png)
+![Confirm settings](screenshots/08-confirm-settings.png)
 
 I saved the settings as defaults (`/usr/local/community-scripts/defaults/uptimekuma.vars`).
 If I ever rebuild this container, it's one command with identical settings.
 That's reproducibility for free.
 
-![Save as defaults](screenshots/40-save-defaults.png)
+![Save as defaults](screenshots/09-save-defaults.png)
 
 ---
 
@@ -230,7 +198,7 @@ That's reproducibility for free.
 The script creates the container, installs Node.js 22 and Uptime Kuma 2.5.8,
 creates the service, and prints the URL:
 
-![Install complete](screenshots/41-install-complete.png)
+![Install complete](screenshots/10-install-complete.png)
 
 > **"No IPv6 Internet (IPv4 is enough)"** in the output is informational, not
 > an error. Same as on the AdGuard build.
@@ -242,8 +210,8 @@ apt update && apt upgrade -y
 systemctl reboot
 ```
 
-![apt update && apt upgrade](screenshots/42-apt-update-upgrade.png)
-![Up to date, then reboot](screenshots/43-apt-upgrade-reboot.png)
+![apt update && apt upgrade](screenshots/11-apt-update-upgrade.png)
+![Up to date, then reboot](screenshots/12-apt-upgrade-reboot.png)
 
 Everything was already current, because the script updates the OS during
 install. I still run the update by habit on every new container. The
@@ -267,15 +235,10 @@ Browse to `http://192.168.50.102:3001`.
 maintain, and it's recommended for small deployments. MariaDB/MySQL makes
 sense at a much larger scale.
 
-![Choose SQLite](screenshots/44-database-sqlite.png)
+![Choose SQLite](screenshots/13-database-sqlite.png)
 
-Create the admin account (a strong password that goes into Vaultwarden later):
-
-![Create admin account](screenshots/45-create-admin-account.png)
-
-An empty dashboard, ready for monitors:
-
-![Empty dashboard](screenshots/46-empty-dashboard.png)
+Then create the admin account (a strong password that goes into Vaultwarden
+later), and the empty dashboard is ready for monitors.
 
 ---
 
@@ -293,7 +256,7 @@ An empty dashboard, ready for monitors:
 | Retries | 0 |
 | **Ignore TLS/SSL errors** | ✅. Proxmox uses a self-signed certificate. Without this, the monitor reports "down" when it's really "untrusted cert". |
 
-![Proxmox monitor](screenshots/47-monitor-proxmox.png)
+![Proxmox monitor](screenshots/14-monitor-proxmox.png)
 
 ### AdGuard admin page
 
@@ -304,7 +267,6 @@ An empty dashboard, ready for monitors:
 | Heartbeat interval | 30 seconds |
 | Retries | 0 |
 
-![AdGuard monitor](screenshots/48-monitor-adguard-http.png)
 
 > **Retries 0 vs 2:** with 0 retries, a single failed check sends an alert
 > immediately. That's the fastest detection, but one network blip pages me.
@@ -321,10 +283,7 @@ An empty dashboard, ready for monitors:
 **Profile menu → Settings → Notifications → Set Up Notification →
 Notification Type: Telegram**
 
-![Open settings](screenshots/49-open-settings.png)
-![Notifications settings](screenshots/50-settings-notifications.png)
-![Choose Telegram](screenshots/51-notification-type-telegram.png)
-![Telegram notification form](screenshots/52-notification-form.png)
+![Telegram notification form](screenshots/15-notification-form.png)
 
 ### 1. Create the bot with @BotFather
 
@@ -332,7 +291,7 @@ In Telegram, message **@BotFather** → `/newbot` → pick a display name → pi
 username ending in `bot`. It took several tries to find a username BotFather
 accepted. BotFather then replies with the **bot token**.
 
-![Creating the bot with BotFather](screenshots/53-botfather-create-bot.png)
+![Creating the bot with BotFather](screenshots/16-botfather-create-bot.png)
 
 ### 2. Token and Chat ID
 
@@ -340,7 +299,7 @@ Paste the token into **Bot Token**. Then open the new bot in Telegram, tap
 **Start**, and send it any message. Back in Uptime Kuma, click **Auto Get** to
 fill in the **Chat ID**.
 
-![Bot token and Chat ID](screenshots/54-token-and-chat-id.png)
+![Bot token and Chat ID](screenshots/17-token-and-chat-id.png)
 
 > **The bot token is a password.** Anyone with it can send messages as the
 > bot. It's never pasted into chat or committed anywhere, and both the
@@ -369,12 +328,12 @@ test alerts carry no heartbeat data.
 
 **Test** → **Save**.
 
-![Message template, format, Test, Save](screenshots/55-message-template.png)
+![Message template, format, Test, Save](screenshots/18-message-template.png)
 
 The test message arrives in Telegram, which confirms the bot token, Chat ID
 and template all work:
 
-![Test alert received in Telegram](screenshots/56-test-alert-received.png)
+![Test alert received in Telegram](screenshots/19-test-alert-received.png)
 
 ---
 
@@ -395,7 +354,7 @@ asks AdGuard to resolve a real domain:
 | Record type | `A` |
 | Heartbeat interval | 30 seconds |
 
-![AdGuard DNS monitor](screenshots/57-monitor-adguard-dns.png)
+![AdGuard DNS monitor](screenshots/20-monitor-adguard-dns.png)
 
 ### Tailscale
 
@@ -404,7 +363,7 @@ The Tailscale container has no web page, so it's a **Ping** monitor on
 
 ### All green
 
-![All monitors at 100%](screenshots/58-all-monitors-green.png)
+![All monitors at 100%](screenshots/21-all-monitors-green.png)
 
 ### Failure test: stop a service on purpose
 
@@ -417,13 +376,13 @@ stopping AdGuard would take DNS down for the whole house.
 pct stop 100
 ```
 
-![Stopping the Tailscale container](screenshots/59-pct-stop-tailscale.png)
+![Stopping the Tailscale container](screenshots/22-pct-stop-tailscale.png)
 
 The **Down** alert reached my phone. First it showed plain packet loss, then
 "Destination Host Unreachable" once the container's address dropped off the
 network:
 
-![Down alert in Telegram](screenshots/60-telegram-down-alert.png)
+![Down alert in Telegram](screenshots/23-telegram-down-alert.png)
 
 Then I brought it back:
 
@@ -433,7 +392,7 @@ pct start 100
 
 The **Up** alert followed:
 
-![Up alert in Telegram](screenshots/61-telegram-up-alert.png)
+![Up alert in Telegram](screenshots/24-telegram-up-alert.png)
 
 That's the whole loop proven: **failure → detection → alert → recovery →
 all-clear**.
@@ -490,8 +449,7 @@ reliability-relevant choices a Default Install would have made for me.
 ---
 
 *Screenshots are redacted: the bot token, Chat ID, bot username, Telegram
-profile photos, my Uptime Kuma username, the container timezone, and search
-tracking data are covered. The lab's `192.168.50.x` addresses are left
+profile photos and the container timezone are covered. The lab's `192.168.50.x` addresses are left
 visible. They're private (RFC 1918) and not reachable from the internet.
 Image metadata is stripped.*
 

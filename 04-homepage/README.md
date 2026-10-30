@@ -93,7 +93,7 @@ Challenge #1). I chose **Advanced Install**.
 
 Same approach as Uptime Kuma: every setting chosen on purpose. This is the
 fourth container built with the same wizard, so the screens look identical
-to that build ([full walkthrough with every screen](../03-uptime-kuma/#part-2-advanced-install-every-choice-explained)).
+to that build ([every choice explained there](../03-uptime-kuma/#part-2-advanced-install-every-choice-explained)).
 Below are this build's choices. The **Confirm Settings** screenshot further
 down shows them all in one place.
 
