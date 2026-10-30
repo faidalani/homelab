@@ -260,7 +260,7 @@ it, not everything root can do.
 The secret is shown **once**. I copied it straight into the `.env` file
 (Part 6).
 
-![Token secret (redacted)](screenshots/46-token-secret.png)
+![Token secret (redacted)](screenshots/46-token-created.png)
 
 Then I gave it a role. **Permissions → Add → API Token Permission**:
 Path `/`, Token `root@pam!homepage`, Role **PVEAuditor**.
@@ -324,7 +324,7 @@ Homepage fills them in at startup from `/opt/homepage/.env`. The existing
 protection against requests using unexpected host names.
 
 ![The .env file before](screenshots/54-env-before.png)
-![Secrets added at the end (redacted)](screenshots/55-env-secrets-added.png)
+![Secrets added at the end (redacted)](screenshots/55-env-values-added.png)
 
 ```
 HOMEPAGE_VAR_PROXMOX_TOKEN_ID=root@pam!homepage
