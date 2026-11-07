@@ -482,6 +482,6 @@ covered. The background is fan art, credited at the top. The
 lab's `192.168.50.x` addresses are left visible. They're private (RFC 1918)
 and not reachable from the internet. Image metadata is stripped.*
 
-**Phase 1 (core services) is complete.** *Next: Nginx Proxy Manager +
-Vaultwarden (HTTPS and a password manager), then OPNsense and the segmented
-lab networks.*
+**Phase 1 (core services) is complete.** *Next:
+[Nginx Proxy Manager](../05-nginx-proxy-manager/) (HTTPS for every service),
+then Vaultwarden, OPNsense and the segmented lab networks.*

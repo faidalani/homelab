@@ -214,6 +214,11 @@ ships disabled, and I left it off.
 > a legit site, and diminishing returns on coverage. Three good, maintained
 > lists beat a giant stack of overlapping ones.
 
+> **Update:** I later added a fourth list, **HaGeZi's Encrypted DNS/VPN/TOR/Proxy
+> Bypass**, which stops devices from routing around the DNS filter. It also
+> blocks Tailscale (a VPN), so it needed one exception rule. See
+> [build 05, Challenge 3](../05-nginx-proxy-manager/#3-tailscalecom-stopped-loading-not-npms-fault).
+
 ---
 
 ## Part 5: Proof it works

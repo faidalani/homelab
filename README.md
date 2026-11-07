@@ -22,6 +22,7 @@ with every step, screenshot and the problems I hit along the way.
 | DNS | AdGuard Home: network-wide filtering, encrypted (DoH) upstreams |
 | Monitoring | Uptime Kuma: health checks on every service, Telegram alerts |
 | Dashboard | Homepage: one page with live stats from every service |
+| Reverse proxy | Nginx Proxy Manager: trusted HTTPS for every service via `*.lab.faidalani.com` |
 
 ```mermaid
 flowchart LR
@@ -38,6 +39,8 @@ flowchart LR
     UK -. alerts .-> TG((Telegram))
     PVE --> HP[CT 103: Homepage<br/>dashboard]
     HP -. read-only API .-> PVE
+    PVE --> NPM[CT 104: Nginx Proxy Manager<br/>reverse proxy + HTTPS]
+    NPM -. HTTPS names .-> AG
     Remote[Phone / laptop<br/>anywhere] -. encrypted tailnet .-> TS
 ```
 
@@ -54,6 +57,13 @@ flowchart LR
 | 03 | [Uptime Kuma](03-uptime-kuma/) | Service monitoring + phone alerts | ✅ Done |
 | 04 | [Homepage](04-homepage/) | Single dashboard with live stats | ✅ Done |
 
+### Phase 2: Secure access (in progress)
+
+| # | Component | What it does | Status |
+|---|---|---|---|
+| 05 | [Nginx Proxy Manager](05-nginx-proxy-manager/) | Trusted HTTPS for every service, zero inbound ports | ✅ Done |
+| 06 | Vaultwarden | Self-hosted password manager behind the proxy | 🔜 Next |
+
 ### Later phases (planned)
 
 - **OPNsense firewall** segmenting the lab into separate networks: CORP
@@ -62,8 +72,6 @@ flowchart LR
 - **Active Directory**: Windows Server DC, two clients, OUs, GPOs,
   admin/user/guest accounts
 - **Kali Linux** attack simulation, with detections tracked in Wazuh
-- **Nginx Proxy Manager + Vaultwarden** for internal HTTPS and a self-hosted
-  password manager
 
 ---
 
@@ -76,7 +84,8 @@ flowchart LR
 - **Screenshots are redacted** before they're committed: account emails and
   tailnet names, Tailscale (100.x) addresses, one-time auth links, personal
   device names and their IPs, MAC addresses and the IPv6 addresses derived
-  from them, SSH host fingerprints, and anything tied to location. The lab's
+  from them, SSH host fingerprints, account names, and anything tied to
+  location. The lab's
   own `192.168.50.x` addresses are left visible because a reader needs them
   to follow along. They're private (RFC 1918) and not reachable from the
   internet. Image metadata is stripped.
