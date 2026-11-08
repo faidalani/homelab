@@ -550,5 +550,5 @@ example value, not mine. The background is fan art, credited above. The
 lab's `192.168.50.x` addresses are left visible. They're private (RFC 1918)
 and not reachable from the internet. Image metadata is stripped.*
 
-*Next: [Vaultwarden](../README.md#phase-2-secure-access-in-progress), a
-self-hosted password manager behind this proxy.*
+*Next: [Vaultwarden](../06-vaultwarden/), a self-hosted password manager
+behind this proxy.*

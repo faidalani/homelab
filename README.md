@@ -23,6 +23,7 @@ with every step, screenshot and the problems I hit along the way.
 | Monitoring | Uptime Kuma: health checks on every service, Telegram alerts |
 | Dashboard | Homepage: one page with live stats from every service |
 | Reverse proxy | Nginx Proxy Manager: trusted HTTPS for every service via `*.lab.faidalani.com` |
+| Passwords | Vaultwarden: self-hosted Bitwarden server, phone + browser, 2FA |
 
 ```mermaid
 flowchart LR
@@ -41,6 +42,8 @@ flowchart LR
     HP -. read-only API .-> PVE
     PVE --> NPM[CT 104: Nginx Proxy Manager<br/>reverse proxy + HTTPS]
     NPM -. HTTPS names .-> AG
+    PVE --> VW[CT 105: Vaultwarden<br/>password manager]
+    NPM -. vault.lab .-> VW
     Remote[Phone / laptop<br/>anywhere] -. encrypted tailnet .-> TS
 ```
 
@@ -57,12 +60,12 @@ flowchart LR
 | 03 | [Uptime Kuma](03-uptime-kuma/) | Service monitoring + phone alerts | ✅ Done |
 | 04 | [Homepage](04-homepage/) | Single dashboard with live stats | ✅ Done |
 
-### Phase 2: Secure access (in progress)
+### Phase 2: Secure access ✅ complete
 
 | # | Component | What it does | Status |
 |---|---|---|---|
 | 05 | [Nginx Proxy Manager](05-nginx-proxy-manager/) | Trusted HTTPS for every service, zero inbound ports | ✅ Done |
-| 06 | Vaultwarden | Self-hosted password manager behind the proxy | 🔜 Next |
+| 06 | [Vaultwarden](06-vaultwarden/) | Self-hosted password manager behind the proxy | ✅ Done |
 
 ### Later phases (planned)
 
