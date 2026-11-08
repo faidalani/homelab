@@ -323,7 +323,7 @@ port and WebSockets switch change:
 | `adguard.lab.faidalani.com` | http | `192.168.50.101:80` | Off | Worked example above |
 | `uptime.lab.faidalani.com` | http | `192.168.50.102:3001` | **On** | Uptime Kuma's live dashboard runs over WebSockets |
 | `home.lab.faidalani.com` | http | `192.168.50.103:3000` | Off | Also needs `HOMEPAGE_ALLOWED_HOSTS` (Part 7) |
-| `npm.lab.faidalani.com` | http | `192.168.50.104:81` | Off | NPM's own admin UI, now behind its own certificate |
+| `npm.lab.faidalani.com` | http | `127.0.0.1:81` | Off | NPM's own admin UI. `127.0.0.1` because NPM proxies to itself inside CT 104. |
 | `proxmox.lab.faidalani.com` | **https** | `192.168.50.151:8006` | **On** | See Challenges 1 and 2 |
 
 The padlock is real: a public CA (Let's Encrypt), trusted by every browser,
